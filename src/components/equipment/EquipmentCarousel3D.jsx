@@ -157,7 +157,7 @@ export function EquipmentCarousel3D({ items = [] }) {
 
                     <div className="aura-carousel3d__footer">
                       <div className="aura-carousel3d__price">
-                        <span className="aura-carousel3d__amount">${item.dailyRate}</span>
+                        <span className="aura-carousel3d__amount">₹{item.dailyRate?.toLocaleString('en-IN')}</span>
                         <span className="aura-carousel3d__unit">/day</span>
                       </div>
                       <Link

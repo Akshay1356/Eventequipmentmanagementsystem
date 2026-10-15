@@ -179,10 +179,10 @@ export function BookingDetailsPage() {
                     <td className="aura-manifest__table-item-name">{item.name}</td>
                     <td style={{ textTransform: 'capitalize', color: 'var(--color-accent-primary)' }}>{item.category}</td>
                     <td style={{ textAlign: 'center', fontWeight: 600, color: '#FFF' }}>{item.quantity}</td>
-                    <td style={{ textAlign: 'right' }}>${item.dailyRate}.00</td>
+                    <td style={{ textAlign: 'right' }}>₹{item.dailyRate?.toLocaleString('en-IN')}</td>
                     <td style={{ textAlign: 'right' }}>{booking.durationDays}d</td>
                     <td style={{ textAlign: 'right', fontWeight: 700, color: '#FFF' }}>
-                      ${item.subtotal ? item.subtotal.toLocaleString() : (item.quantity * item.dailyRate * booking.durationDays).toLocaleString()}.00
+                      ₹{item.subtotal ? item.subtotal.toLocaleString('en-IN') : (item.quantity * item.dailyRate * booking.durationDays).toLocaleString('en-IN')}
                     </td>
                   </tr>
                 ))}
@@ -207,13 +207,13 @@ export function BookingDetailsPage() {
             <div className="aura-manifest__totals-box">
               <div className="aura-manifest__totals-row">
                 <span>Equipment Subtotal:</span>
-                <strong>${booking.equipmentSubtotal ? booking.equipmentSubtotal.toLocaleString() : booking.totalAmount.toLocaleString()}.00</strong>
+                <strong>₹{booking.equipmentSubtotal ? booking.equipmentSubtotal.toLocaleString('en-IN') : booking.totalAmount.toLocaleString('en-IN')}</strong>
               </div>
 
               {booking.needsTechnician && (
                 <div className="aura-manifest__totals-row">
                   <span>Systems Technician ({booking.durationDays}d):</span>
-                  <strong>${booking.technicianFee ? booking.technicianFee.toLocaleString() : '300'}.00</strong>
+                  <strong>₹{booking.technicianFee ? booking.technicianFee.toLocaleString('en-IN') : '2,500'}</strong>
                 </div>
               )}
 
@@ -229,7 +229,7 @@ export function BookingDetailsPage() {
 
               <div className="aura-manifest__totals-row grand-total">
                 <span>Total Amount:</span>
-                <span>${booking.totalAmount.toLocaleString()}.00</span>
+                <span>₹{booking.totalAmount.toLocaleString('en-IN')}</span>
               </div>
             </div>
           </div>

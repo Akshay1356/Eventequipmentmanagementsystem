@@ -469,7 +469,7 @@ export function HeroPerspectiveShowcase() {
                     </div>
                     <h5 className="aura-window-product-name">{item.name}</h5>
                     <div className="aura-window-product-footer">
-                      <span className="aura-window-product-rate">${item.dailyRate}/day</span>
+                      <span className="aura-window-product-rate">₹{item.dailyRate?.toLocaleString('en-IN')}/day</span>
                       <span className="aura-window-product-btn">Reserve</span>
                     </div>
                   </div>

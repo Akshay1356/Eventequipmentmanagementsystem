@@ -298,7 +298,7 @@ export function EquipmentPage() {
                   {/* Footer & Actions */}
                   <div className="aura-item-card__footer">
                     <div className="aura-item-card__price-wrap">
-                      <span className="aura-item-card__price">${item.dailyRate}</span>
+                      <span className="aura-item-card__price">₹{item.dailyRate?.toLocaleString('en-IN')}</span>
                       <span className="aura-item-card__unit">{item.unit}</span>
                     </div>
 

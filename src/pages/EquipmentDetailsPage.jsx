@@ -234,7 +234,7 @@ export function EquipmentDetailsPage() {
               <div className="aura-details__model-tag">Model: {equipment.model} • SKU: {equipment.id.toUpperCase()}</div>
 
               <div className="aura-details__price-row">
-                <span className="aura-details__rate">${equipment.dailyRate}</span>
+                <span className="aura-details__rate">₹{equipment.dailyRate?.toLocaleString('en-IN')}</span>
                 <span className="aura-details__unit">{equipment.unit}</span>
 
                 <div className="aura-details__stock-badge">
@@ -328,8 +328,8 @@ export function EquipmentDetailsPage() {
                   <strong>{durationDays} {durationDays === 1 ? 'Event Day' : 'Event Days'}</strong>
                 </div>
                 <div className="aura-calc-breakdown-row">
-                  <span>Rental Rate ($/unit):</span>
-                  <strong>${equipment.dailyRate}.00 / day</strong>
+                  <span>Rental Rate (₹/unit):</span>
+                  <strong>₹{equipment.dailyRate?.toLocaleString('en-IN')} / day</strong>
                 </div>
                 <div className="aura-calc-breakdown-row">
                   <span>Units Reserved:</span>
@@ -348,7 +348,7 @@ export function EquipmentDetailsPage() {
               {/* Total Row */}
               <div className="aura-calc-total-row">
                 <span className="aura-calc-total-label">Estimated Total:</span>
-                <span className="aura-calc-total-val">${subtotal.toLocaleString()}.00</span>
+                <span className="aura-calc-total-val">₹{subtotal.toLocaleString('en-IN')}</span>
               </div>
 
               {/* Booking CTA Button */}

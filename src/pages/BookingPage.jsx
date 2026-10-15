@@ -101,10 +101,10 @@ export function BookingPage() {
   };
 
   const durationDays = calculateDurationDays();
-  const rate = equipment ? equipment.dailyRate : 280;
+  const rate = equipment ? equipment.dailyRate : 5500;
   const maxStock = equipment?.availableQuantity || 16;
   const equipmentSubtotal = durationDays * quantity * rate;
-  const technicianDailyRate = 250;
+  const technicianDailyRate = 2500;
   const technicianFee = needsTechnician ? durationDays * technicianDailyRate : 0;
   const totalAmount = equipmentSubtotal + technicianFee;
 
@@ -224,7 +224,7 @@ export function BookingPage() {
               <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid var(--border-medium)', paddingTop: '0.65rem' }}>
                 <span style={{ fontWeight: 600, color: '#FFF' }}>Estimated Total:</span>
                 <strong style={{ fontSize: '1.25rem', color: 'var(--color-accent-bright)' }}>
-                  ${confirmedBooking.totalAmount.toLocaleString()}.00
+                  ₹{confirmedBooking.totalAmount.toLocaleString('en-IN')}
                 </strong>
               </div>
             </div>
@@ -430,7 +430,7 @@ export function BookingPage() {
                       Certified audio/lighting engineer for on-site load-in supervision, Dante/DMX network routing, and live sound/lighting operation.
                     </div>
                   </div>
-                  <div className="aura-addon-price">+${technicianDailyRate}/day</div>
+                  <div className="aura-addon-price">+₹{technicianDailyRate.toLocaleString('en-IN')}/day</div>
                 </label>
 
                 {/* Staging Notes */}
@@ -470,7 +470,7 @@ export function BookingPage() {
                 <div className="aura-summary-item__info">
                   <h3 className="aura-summary-item__name">{equipment.name}</h3>
                   <div className="aura-summary-item__rate">
-                    ${equipment.dailyRate}.00 / day
+                    ₹{equipment.dailyRate?.toLocaleString('en-IN')} / day
                   </div>
                 </div>
               </div>
@@ -514,12 +514,12 @@ export function BookingPage() {
               </div>
               <div className="aura-summary-row">
                 <span>Equipment Rental Subtotal:</span>
-                <strong>${equipmentSubtotal.toLocaleString()}.00</strong>
+                <strong>₹{equipmentSubtotal.toLocaleString('en-IN')}</strong>
               </div>
               {needsTechnician && (
                 <div className="aura-summary-row">
                   <span>On-Site Technician ({durationDays}d):</span>
-                  <strong>${technicianFee.toLocaleString()}.00</strong>
+                  <strong>₹{technicianFee.toLocaleString('en-IN')}</strong>
                 </div>
               )}
               <div className="aura-summary-row">
@@ -535,7 +535,7 @@ export function BookingPage() {
             {/* Total Estimated Cost */}
             <div className="aura-summary-total">
               <span className="aura-summary-total-label">Estimated Total:</span>
-              <span className="aura-summary-total-val">${totalAmount.toLocaleString()}.00</span>
+              <span className="aura-summary-total-val">₹{totalAmount.toLocaleString('en-IN')}</span>
             </div>
 
             {/* Submit Reservation Action */}
