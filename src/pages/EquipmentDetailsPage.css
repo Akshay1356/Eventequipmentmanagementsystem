@@ -1,0 +1,345 @@
+/* ==========================================================================
+   AURA EVENT GEAR — EQUIPMENT DETAILS PAGE STYLES
+   ========================================================================== */
+
+.aura-details {
+  padding: 2.5rem 0 5rem 0;
+  min-height: 80vh;
+}
+
+.aura-details__back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.aura-details__back-link:hover {
+  color: var(--color-accent-bright);
+}
+
+.aura-details__layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: flex-start;
+}
+
+@media (min-width: 960px) {
+  .aura-details__layout {
+    grid-template-columns: 1.1fr 1fr;
+    gap: 3.5rem;
+  }
+}
+
+/* Gallery Showcase Box */
+.aura-details__gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.aura-details__main-image-wrap {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  background: #03060C;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--border-medium);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7);
+}
+
+.aura-details__main-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.aura-details__fallback-box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  color: var(--color-accent-primary);
+  background: radial-gradient(ellipse at center, #0F1D33 0%, #03060C 100%);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.aura-details__thumbnail-row {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.aura-details__thumb-btn {
+  width: 80px;
+  height: 60px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 2px solid var(--border-subtle);
+  background: #040812;
+  cursor: pointer;
+  padding: 0;
+  transition: all var(--transition-fast);
+}
+
+.aura-details__thumb-btn:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.aura-details__thumb-btn.is-active {
+  border-color: var(--color-accent-primary);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.35);
+}
+
+.aura-details__thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Info Column */
+.aura-details__header {
+  margin-bottom: 1.5rem;
+}
+
+.aura-details__tags {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.6rem;
+}
+
+.aura-details__brand-pill {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-accent-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.aura-details__name {
+  font-size: clamp(1.85rem, 3vw, 2.4rem);
+  font-weight: 800;
+  color: #FFF;
+  line-height: 1.25;
+  margin-bottom: 0.5rem;
+}
+
+.aura-details__model-tag {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: 1.25rem;
+}
+
+.aura-details__price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.aura-details__rate {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--color-accent-bright);
+  line-height: 1;
+}
+
+.aura-details__unit {
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+}
+
+.aura-details__stock-badge {
+  margin-left: auto;
+}
+
+.aura-details__desc {
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+/* Interactive Calculator Box */
+.aura-calc-card {
+  padding: 1.75rem;
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-surface-elevated);
+  border: 1px solid var(--border-accent);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
+  margin-bottom: 2.5rem;
+}
+
+.aura-calc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.aura-calc-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #FFF;
+}
+
+.aura-calc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 540px) {
+  .aura-calc-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.aura-calc-qty-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  padding: 0.75rem 1rem;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.aura-calc-qty-control {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.aura-calc-qty-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-surface-elevated);
+  border: 1px solid var(--border-medium);
+  color: #FFF;
+  font-size: 1.1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.aura-calc-qty-btn:hover:not(:disabled) {
+  background: rgba(56, 189, 248, 0.15);
+  border-color: var(--color-accent-primary);
+}
+
+.aura-calc-qty-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.aura-calc-qty-val {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #FFF;
+  min-width: 24px;
+  text-align: center;
+}
+
+.aura-calc-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 1.25rem;
+}
+
+.aura-calc-breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-text-secondary);
+}
+
+.aura-calc-breakdown-row strong {
+  color: #FFF;
+}
+
+.aura-calc-total-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.aura-calc-total-label {
+  font-weight: 600;
+  color: #FFF;
+  font-size: 1.05rem;
+}
+
+.aura-calc-total-val {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--color-accent-bright);
+}
+
+/* Specifications Table */
+.aura-specs-card {
+  padding: 1.75rem;
+  background: var(--color-bg-surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+}
+
+.aura-specs-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #FFF;
+  margin-bottom: 1rem;
+}
+
+.aura-specs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.aura-specs-table tr {
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.aura-specs-table tr:last-child {
+  border-bottom: none;
+}
+
+.aura-specs-table td {
+  padding: 0.75rem 0;
+}
+
+.aura-specs-label {
+  color: var(--color-text-muted);
+  width: 40%;
+}
+
+.aura-specs-value {
+  color: #FFF;
+  font-weight: 500;
+}

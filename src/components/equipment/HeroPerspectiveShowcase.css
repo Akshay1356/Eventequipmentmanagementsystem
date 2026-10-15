@@ -1,0 +1,781 @@
+/* ==========================================================================
+   HERO PERSPECTIVE SHOWCASE — 3D CARDS + MACOS BROWSER WINDOW
+   ========================================================================== */
+
+.aura-hero-showcase {
+  --showcase-card-w: 245px;
+  --showcase-card-h: 395px;
+  --showcase-stage-h: 460px;
+  --showcase-overlap: -180px;
+
+  position: relative;
+  width: 100%;
+  max-width: 100vw;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  user-select: none;
+  overflow: visible;
+}
+
+@media (max-width: 1200px) {
+  .aura-hero-showcase {
+    --showcase-card-w: 220px;
+    --showcase-card-h: 350px;
+    --showcase-stage-h: 410px;
+    --showcase-overlap: -150px;
+  }
+}
+
+@media (max-width: 768px) {
+  .aura-hero-showcase {
+    --showcase-card-w: 180px;
+    --showcase-card-h: 290px;
+    --showcase-stage-h: 340px;
+    --showcase-overlap: -120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .aura-hero-showcase {
+    --showcase-card-w: 150px;
+    --showcase-card-h: 240px;
+    --showcase-stage-h: 280px;
+    --showcase-overlap: -90px;
+  }
+}
+
+/* ==========================================================================
+   1. 3D PERSPECTIVE BACKGROUND CARDS
+   ========================================================================== */
+
+.aura-showcase-stage {
+  position: relative;
+  width: 100%;
+  height: var(--showcase-stage-h);
+  perspective: 1350px;
+  perspective-origin: 50% 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: var(--showcase-overlap);
+  z-index: 1;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.aura-showcase-ring {
+  position: relative;
+  width: var(--showcase-card-w);
+  height: var(--showcase-card-h);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.aura-bg-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--showcase-card-w);
+  height: var(--showcase-card-h);
+  border-radius: 20px;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.92),
+              0 0 1px rgba(255, 255, 255, 0.25);
+}
+
+/* Card Inners */
+.aura-bg-card__inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Photo Cards */
+.aura-bg-card__inner--photo {
+  background: #060A13;
+}
+
+.aura-bg-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.9) contrast(1.1);
+}
+
+.aura-bg-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(2, 4, 10, 0.95) 100%);
+}
+
+.aura-bg-card__content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.25rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.aura-bg-card__tag {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--color-accent-bright);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.aura-bg-card__title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.2;
+}
+
+.aura-bg-card__subtitle {
+  font-size: 0.725rem;
+  color: var(--color-text-secondary);
+}
+
+/* Graphic Styled Cards (Matching reference screenshot) */
+.aura-bg-card__inner--graphic-pink {
+  background: #F8FAFC;
+  border-color: rgba(255, 255, 255, 0.45);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1.75rem 1.25rem;
+}
+
+.aura-bg-card__inner--graphic-rose {
+  background: #FDF2F8;
+  border-color: rgba(244, 114, 182, 0.35);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1.75rem 1.25rem;
+}
+
+.aura-bg-card__inner--graphic-purple {
+  background: linear-gradient(135deg, #7C3AED 0%, #C026D3 100%);
+  border-color: rgba(236, 72, 153, 0.4);
+  box-shadow: inset 0 0 24px rgba(255, 255, 255, 0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1.75rem 1.25rem;
+}
+
+.aura-bg-card__inner--graphic-cyan {
+  background: linear-gradient(135deg, #091926 0%, #050E17 100%);
+  border-color: rgba(56, 189, 248, 0.35);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem 1.25rem;
+}
+
+.aura-bg-card__inner--graphic-cyan .aura-bg-card__graphic-title {
+  color: var(--color-accent-bright);
+}
+
+.aura-bg-card__inner--graphic-amber {
+  background: linear-gradient(135deg, #241A0A 0%, #120D04 100%);
+  border-color: rgba(251, 191, 36, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem 1.25rem;
+}
+
+.aura-bg-card__inner--graphic-amber .aura-bg-card__graphic-title {
+  color: #FCD34D;
+}
+
+.aura-bg-card__inner--graphic-emerald {
+  background: linear-gradient(135deg, #092119 0%, #04120D 100%);
+  border-color: rgba(52, 211, 153, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem 1.25rem;
+}
+
+.aura-bg-card__inner--graphic-emerald .aura-bg-card__graphic-title {
+  color: #6EE7B7;
+}
+
+.aura-bg-card__inner--graphic-indigo {
+  background: linear-gradient(135deg, #131429 0%, #0A0A17 100%);
+  border-color: rgba(129, 140, 248, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem 1.25rem;
+}
+
+.aura-bg-card__inner--graphic-indigo .aura-bg-card__graphic-title {
+  color: #A5B4FC;
+}
+
+.aura-bg-card__graphic-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+  margin-bottom: 1rem;
+}
+
+.aura-bg-card__graphic-title {
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: #FFFFFF;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.aura-bg-card__inner--graphic-rose .aura-bg-card__graphic-badge {
+  color: #BE185D;
+  border-color: rgba(190, 24, 93, 0.25);
+  background: rgba(190, 24, 93, 0.08);
+}
+
+.aura-bg-card__inner--graphic-rose .aura-bg-card__graphic-title {
+  color: #831843;
+}
+
+.aura-bg-card__inner--graphic-rose .aura-bg-card__graphic-divider {
+  background: #FBCFE8;
+}
+
+.aura-bg-card__inner--graphic-rose .aura-bg-card__graphic-sub {
+  color: #9D174D;
+}
+
+.aura-bg-card__inner--graphic-rose .aura-bg-card__graphic-detail {
+  color: #BE185D;
+}
+
+.aura-bg-card__inner--graphic-pink .aura-bg-card__graphic-badge {
+  color: #DC2626;
+  border-color: rgba(220, 38, 38, 0.25);
+  background: rgba(220, 38, 38, 0.08);
+}
+
+.aura-bg-card__inner--graphic-pink .aura-bg-card__graphic-title {
+  color: #0F172A;
+}
+
+.aura-bg-card__inner--graphic-pink .aura-bg-card__graphic-divider {
+  background: #E2E8F0;
+}
+
+.aura-bg-card__inner--graphic-pink .aura-bg-card__graphic-sub {
+  color: #475569;
+}
+
+.aura-bg-card__inner--graphic-pink .aura-bg-card__graphic-detail {
+  color: #94A3B8;
+}
+
+.aura-bg-card__inner--graphic-purple .aura-bg-card__graphic-title {
+  color: #FFFFFF;
+}
+
+.aura-bg-card__graphic-divider {
+  width: 40px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 0.85rem auto;
+}
+
+.aura-bg-card__graphic-sub {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.35rem;
+}
+
+.aura-bg-card__graphic-detail {
+  font-size: 0.675rem;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.04em;
+}
+
+/* ==========================================================================
+   2. FOREGROUND MACOS BROWSER / DEPOT WINDOW MOCKUP
+   ========================================================================== */
+
+.aura-browser-window {
+  position: relative;
+  z-index: 3;
+  width: min(940px, 96%);
+  background: #090F1B;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 35px 80px rgba(0, 0, 0, 0.95),
+              0 0 35px rgba(56, 189, 248, 0.16),
+              inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  margin: 0 auto;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  pointer-events: auto;
+}
+
+/* macOS Chrome Header */
+.aura-browser-header {
+  height: 44px;
+  background: #070B14;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+.aura-browser-traffic-lights {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  width: 60px;
+}
+
+.aura-traffic-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.aura-traffic-dot--red {
+  background: #FF5F56;
+  border: 1px solid #E0443E;
+}
+
+.aura-traffic-dot--yellow {
+  background: #FFBD2E;
+  border: 1px solid #DEA123;
+}
+
+.aura-traffic-dot--green {
+  background: #27C93F;
+  border: 1px solid #1AAB29;
+}
+
+.aura-browser-address-bar {
+  flex: 1;
+  max-width: 480px;
+  margin: 0 auto;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0 0.85rem;
+}
+
+.aura-browser-search-icon {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.aura-browser-url-text {
+  font-size: 0.775rem;
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.aura-browser-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 60px;
+  justify-content: flex-end;
+}
+
+.aura-browser-icon-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.aura-browser-icon-btn:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Interior Content */
+.aura-browser-content {
+  background: #060A13;
+  padding: 1rem 1.25rem 1.5rem 1.25rem;
+}
+
+/* Mini Navbar inside Window */
+.aura-window-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  margin-bottom: 1rem;
+}
+
+.aura-window-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.85rem;
+  color: #FFFFFF;
+}
+
+.aura-window-logo-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-accent-primary);
+  box-shadow: 0 0 8px var(--color-accent-primary);
+}
+
+.aura-window-logo-cat {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--color-accent-bright);
+  letter-spacing: 0.08em;
+  margin-left: 0.25rem;
+}
+
+.aura-window-nav-links {
+  display: none;
+  gap: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .aura-window-nav-links {
+    display: flex;
+  }
+}
+
+.aura-window-nav-btn {
+  background: transparent;
+  border: none;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.aura-window-nav-btn.is-active,
+.aura-window-nav-btn:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.aura-window-status-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.7rem;
+  color: #34D399;
+  background: rgba(52, 211, 153, 0.1);
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(52, 211, 153, 0.25);
+}
+
+/* Hero Banner inside Window (Matching the warm golden/amber banner in the reference) */
+.aura-window-hero {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.aura-window-hero__bg {
+  position: absolute;
+  inset: 0;
+}
+
+.aura-window-hero__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.65) saturate(1.1);
+}
+
+.aura-window-hero__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(6, 10, 19, 0.92) 0%, rgba(6, 10, 19, 0.6) 55%, rgba(6, 10, 19, 0.1) 100%);
+}
+
+.aura-window-hero__info {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  padding: 1.5rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 480px;
+}
+
+.aura-window-hero__eyebrow {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--color-accent-bright);
+  margin-bottom: 0.35rem;
+}
+
+.aura-window-hero__heading {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.2;
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.01em;
+}
+
+.aura-window-hero__desc {
+  font-size: 0.775rem;
+  color: var(--color-text-secondary);
+  line-height: 1.45;
+  margin-bottom: 0.85rem;
+}
+
+.aura-window-hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  width: fit-content;
+  background: #FFFFFF;
+  color: #020204;
+  font-size: 0.725rem;
+  font-weight: 700;
+  padding: 0.4rem 0.9rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: all var(--transition-fast);
+}
+
+.aura-window-hero__cta:hover {
+  background: var(--color-accent-bright);
+  transform: translateY(-1px);
+}
+
+/* Products Section inside Window */
+.aura-window-products-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.aura-window-products-title {
+  font-size: 0.825rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.aura-window-products-more {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-accent-primary);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+}
+
+.aura-window-products-more:hover {
+  color: var(--color-accent-bright);
+}
+
+.aura-window-products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.85rem;
+}
+
+@media (max-width: 680px) {
+  .aura-window-products-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.aura-window-product-card {
+  background: #0B1220;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  overflow: hidden;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-fast);
+}
+
+.aura-window-product-card:hover {
+  border-color: rgba(56, 189, 248, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+}
+
+.aura-window-product-media {
+  position: relative;
+  height: 95px;
+  overflow: hidden;
+  background: #05080F;
+}
+
+.aura-window-product-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.aura-window-product-badge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background: rgba(0, 0, 0, 0.75);
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--color-accent-bright);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+}
+
+.aura-window-product-info {
+  padding: 0.65rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.aura-window-product-rating {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.65rem;
+  color: #FBBF24;
+  font-weight: 600;
+}
+
+.aura-window-product-rating span {
+  margin-left: 3px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.aura-window-product-name {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.aura-window-product-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.25rem;
+}
+
+.aura-window-product-rate {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--color-accent-bright);
+}
+
+.aura-window-product-btn {
+  font-size: 0.675rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  background: rgba(56, 189, 248, 0.2);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   RESPONSIVE OVERRIDES
+   ========================================================================== */
+@media (max-width: 900px) {
+  .aura-showcase-stage {
+    height: 300px;
+    margin-bottom: -110px;
+  }
+  .aura-showcase-ring {
+    width: 170px;
+    height: 240px;
+  }
+  .aura-bg-card {
+    width: 170px;
+    height: 240px;
+  }
+}
+
+@media (max-width: 600px) {
+  .aura-showcase-stage {
+    display: none;
+  }
+  .aura-browser-window {
+    width: 100%;
+  }
+  .aura-window-hero {
+    height: auto;
+  }
+  .aura-window-hero__info {
+    padding: 1.25rem 1rem;
+  }
+}

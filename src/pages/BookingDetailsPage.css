@@ -1,0 +1,188 @@
+/* ==========================================================================
+   AURA EVENT GEAR — BOOKING DETAILS MANIFEST STYLES
+   ========================================================================== */
+
+.aura-manifest {
+  padding: 2.5rem 0 5rem 0;
+  min-height: 80vh;
+}
+
+.aura-manifest__back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.aura-manifest__back-link:hover {
+  color: var(--color-accent-bright);
+}
+
+.aura-manifest__top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-medium);
+}
+
+.aura-manifest__ref-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.35rem;
+}
+
+.aura-manifest__ref-id {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-accent-bright);
+}
+
+.aura-manifest__event-title {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 800;
+  color: #FFF;
+  margin-top: 0.25rem;
+}
+
+.aura-manifest__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Info grid boxes */
+.aura-manifest__info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.aura-manifest__info-card {
+  padding: 1.5rem;
+  background: var(--color-bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+}
+
+.aura-manifest__info-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-accent-primary);
+  margin-bottom: 0.5rem;
+}
+
+.aura-manifest__info-val {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #FFF;
+  margin-bottom: 0.25rem;
+}
+
+.aura-manifest__info-sub {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+/* Manifest Equipment Table */
+.aura-manifest__table-card {
+  padding: 2rem;
+  background: var(--color-bg-surface-elevated);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-lg);
+  margin-bottom: 2rem;
+}
+
+.aura-manifest__table-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #FFF;
+  margin-bottom: 1.5rem;
+}
+
+.aura-manifest__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.aura-manifest__table thead th {
+  padding: 0.75rem 0.5rem;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  border-bottom: 1px solid var(--border-medium);
+}
+
+.aura-manifest__table tbody td {
+  padding: 1rem 0.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--color-text-secondary);
+}
+
+.aura-manifest__table-item-name {
+  color: #FFF;
+  font-weight: 600;
+}
+
+.aura-manifest__financial-summary {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2rem;
+}
+
+.aura-manifest__totals-box {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  font-size: 0.9rem;
+}
+
+.aura-manifest__totals-row {
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-text-secondary);
+}
+
+.aura-manifest__totals-row.grand-total {
+  border-top: 1px solid var(--border-medium);
+  padding-top: 0.75rem;
+  margin-top: 0.25rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--color-accent-bright);
+}
+
+/* Print Styles */
+@media print {
+  .aura-header,
+  .aura-footer,
+  .aura-manifest__back-link,
+  .aura-manifest__actions {
+    display: none !important;
+  }
+  body, html, .aura-manifest {
+    background: #FFF !important;
+    color: #000 !important;
+  }
+  .aura-manifest__table tbody td,
+  .aura-manifest__event-title,
+  .aura-manifest__info-val,
+  .aura-manifest__table-item-name {
+    color: #000 !important;
+  }
+}

@@ -1,0 +1,36 @@
+/* Card Component Styles */
+
+.aura-card {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-normal);
+}
+
+.aura-card--surface {
+  background: var(--color-bg-surface);
+}
+
+.aura-card--elevated {
+  background: var(--color-bg-surface-elevated);
+  box-shadow: var(--shadow-md);
+}
+
+.aura-card--glass {
+  background: var(--color-bg-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-color: var(--border-medium);
+}
+
+.aura-card--hover {
+  cursor: pointer;
+}
+
+.aura-card--hover:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-accent);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45),
+              0 0 16px rgba(56, 189, 248, 0.12);
+}

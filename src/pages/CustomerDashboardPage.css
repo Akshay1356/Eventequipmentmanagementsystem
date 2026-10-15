@@ -1,0 +1,238 @@
+/* ==========================================================================
+   AURA EVENT GEAR — CUSTOMER DASHBOARD STYLES
+   ========================================================================== */
+
+.aura-customer-dash {
+  padding: 3rem 0 5rem 0;
+  min-height: 80vh;
+}
+
+.aura-customer-dash__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.aura-customer-dash__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-accent-primary);
+  margin-bottom: 0.4rem;
+}
+
+.aura-customer-dash__title {
+  font-size: clamp(2rem, 3.5vw, 2.5rem);
+  font-weight: 800;
+  color: #FFF;
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.02em;
+}
+
+.aura-customer-dash__desc {
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+}
+
+/* Metric summary cards */
+.aura-customer-dash__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.aura-stat-box {
+  padding: 1.35rem;
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-surface-elevated);
+  border: 1px solid var(--border-medium);
+  display: flex;
+  flex-direction: column;
+}
+
+.aura-stat-box__label {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.35rem;
+}
+
+.aura-stat-box__val {
+  font-family: var(--font-heading);
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #FFF;
+  line-height: 1.1;
+  margin-bottom: 0.25rem;
+}
+
+.aura-stat-box__detail {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+}
+
+/* Status Filter Tabs */
+.aura-customer-dash__tabs {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-medium);
+  margin-bottom: 2rem;
+}
+
+.aura-customer-dash__tab-btn {
+  background: transparent;
+  border: none;
+  padding: 0.65rem 1.15rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+
+.aura-customer-dash__tab-btn:hover {
+  color: #FFF;
+}
+
+.aura-customer-dash__tab-btn.is-active {
+  color: var(--color-accent-bright);
+  border-bottom-color: var(--color-accent-primary);
+}
+
+/* Booking Cards List */
+.aura-booking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.aura-booking-card {
+  padding: 1.75rem;
+  background: var(--color-bg-surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-normal);
+}
+
+.aura-booking-card:hover {
+  border-color: var(--border-medium);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+}
+
+.aura-booking-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.aura-booking-card__ref-group {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.aura-booking-card__ref {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-accent-bright);
+}
+
+.aura-booking-card__date-created {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.aura-booking-card__main {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 840px) {
+  .aura-booking-card__main {
+    grid-template-columns: 1.5fr 1.2fr 1fr;
+    align-items: center;
+  }
+}
+
+.aura-booking-card__event-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #FFF;
+  margin-bottom: 0.35rem;
+}
+
+.aura-booking-card__event-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+}
+
+.aura-booking-card__meta-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.aura-booking-card__items-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+}
+
+.aura-booking-card__items-count {
+  font-weight: 600;
+  color: #FFF;
+}
+
+.aura-booking-card__items-names {
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+}
+
+.aura-booking-card__pricing-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+@media (min-width: 840px) {
+  .aura-booking-card__pricing-actions {
+    align-items: flex-end;
+  }
+}
+
+.aura-booking-card__total {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #FFF;
+}
+
+.aura-booking-card__btn-group {
+  display: flex;
+  gap: 0.5rem;
+}

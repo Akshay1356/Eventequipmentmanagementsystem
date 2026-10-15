@@ -1,0 +1,101 @@
+/**
+ * High-quality verified event equipment dataset for the Landing Page showcase
+ * Uses authentic event production equipment with high-resolution imagery and graceful fallbacks.
+ */
+
+export const FEATURED_EQUIPMENT = [
+  {
+    id: 'eq_audio_01',
+    name: 'L-Acoustics K2 Line Array',
+    category: 'Audio',
+    subtitle: 'Tour-Grade Active WST Enclosure',
+    description: '3-way active line source element engineered for arenas and outdoor festivals with precision 35-meter acoustic throw.',
+    dailyRate: 280,
+    unit: 'per module/day',
+    tag: 'Flagship Audio',
+    status: 'available',
+    specs: ['35Hz - 20kHz', '147 dB SPL Max', 'Panflex Variable Directivity'],
+    imageUrl: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80',
+  },
+  {
+    id: 'eq_light_01',
+    name: 'Robe MegaPointe Hybrid Beam',
+    category: 'Lighting',
+    subtitle: 'Intelligent Beam / Spot / Wash / FX',
+    description: 'Ultra-bright 470W discharge fixture producing laser-sharp parallel beams and textured aerial gobo projections.',
+    dailyRate: 95,
+    unit: 'per fixture/day',
+    tag: 'Stage Lighting',
+    status: 'available',
+    specs: ['1.8° - 42° Zoom', '2 Gobo Wheels', 'DMX-512 / Art-Net'],
+    imageUrl: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=800&q=80',
+  },
+  {
+    id: 'eq_dj_01',
+    name: 'Pioneer DJ DJM-A9 & CDJ-3000',
+    category: 'DJ Gear',
+    subtitle: 'Industry-Standard Festival Rider Setup',
+    description: '4-channel digital club mixer coupled with 9-inch touchscreen media players featuring 32-bit audio converters.',
+    dailyRate: 220,
+    unit: 'per package/day',
+    tag: 'Festival Standard',
+    status: 'limited',
+    specs: ['32-bit ESS DACs', 'Pro DJ Link LAN', 'Dual USB-C Audio'],
+    imageUrl: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80',
+  },
+  {
+    id: 'eq_video_01',
+    name: 'Unilumin 2.6mm 4K LED Display',
+    category: 'Video & LED',
+    subtitle: 'High-Refresh Touring Video Wall',
+    description: 'Modular lightweight 500x500mm carbon-frame tiles delivering 1,200 nits brightness and HDR10 color fidelity.',
+    dailyRate: 340,
+    unit: 'per sqm/day',
+    tag: 'Broadcast Visuals',
+    status: 'available',
+    specs: ['2.6mm Pixel Pitch', '3,840 Hz Refresh', 'NovaStar UHD Processing'],
+    imageUrl: 'https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?auto=format&fit=crop&w=800&q=80',
+  },
+  {
+    id: 'eq_stage_01',
+    name: 'Global Truss F34 Rigging System',
+    category: 'Stage & Truss',
+    subtitle: 'Certified Square Truss Spans',
+    description: 'Heavy-duty 290mm square aluminum trussing with conical connection systems rated for high-load rigging arrays.',
+    dailyRate: 150,
+    unit: 'per 10m kit/day',
+    tag: 'Rigging Hardware',
+    status: 'available',
+    specs: ['EN 1090 Certified', '50mm Main Tube', 'Up to 18m Free Span'],
+    imageUrl: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=800&q=80',
+  },
+  {
+    id: 'eq_audio_02',
+    name: 'Shure Axient Digital Wireless Mic',
+    category: 'Audio',
+    subtitle: 'Quad-Channel Wireless Vocal System',
+    description: 'Mission-critical wireless vocal package with automatic frequency coordination and zero RF dropouts.',
+    dailyRate: 110,
+    unit: 'per kit/day',
+    tag: 'Live Vocals',
+    status: 'available',
+    specs: ['High-Density Mode', 'ShowLink Remote Control', 'Dante Digital Audio'],
+    imageUrl: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=800&q=80',
+  },
+];
+
+export const PRODUCTION_STATS = [
+  { label: 'Events Powered', target: 750, suffix: '+', decimals: 0, detail: 'Concerts, summits & festivals' },
+  { label: 'Rental Inventory', target: 1400, suffix: '+', decimals: 0, detail: 'Acoustic, visual & stage assets' },
+  { label: 'On-Time Dispatch', target: 99.8, suffix: '%', decimals: 1, detail: 'Technician verified dispatch rate' },
+  { label: 'Audio & Lux Output', target: 120, suffix: 'k+', decimals: 0, detail: 'Watts sound & lumens lighting' },
+];
+
+export const EVENT_CATEGORIES = [
+  { id: 'all', label: 'All Equipment' },
+  { id: 'Audio', label: 'Pro Audio & Sound' },
+  { id: 'Lighting', label: 'Stage & FX Lighting' },
+  { id: 'Video & LED', label: 'LED Walls & Projection' },
+  { id: 'DJ Gear', label: 'DJ & Mixing Systems' },
+  { id: 'Stage & Truss', label: 'Stage & Rigging' },
+];

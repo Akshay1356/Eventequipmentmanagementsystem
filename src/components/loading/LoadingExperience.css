@@ -1,0 +1,307 @@
+/* ==========================================================================
+   AURA CINEMATIC 3D LOADING EXPERIENCE — STYLING
+   ========================================================================== */
+
+.aura-loader-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background-color: #020204;
+  overflow: hidden;
+  user-select: none;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+/* Phase 4 Cinematic Exit Dissolve */
+.aura-loader-overlay.is-exiting {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.02);
+  pointer-events: none;
+}
+
+/* 3D WebGL Canvas Container */
+.aura-stage-canvas-wrap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+  cursor: grab;
+}
+
+.aura-stage-canvas-wrap:active {
+  cursor: grabbing;
+}
+
+.aura-stage-canvas-wrap canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Cinematic Atmospheric Vignette Overlay */
+.aura-loader-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: 
+    radial-gradient(circle at 50% 45%, transparent 40%, rgba(2, 2, 4, 0.35) 75%, rgba(2, 2, 4, 0.9) 100%),
+    linear-gradient(180deg, rgba(2, 2, 4, 0.65) 0%, transparent 18%, transparent 65%, rgba(2, 2, 4, 0.95) 94%);
+  z-index: 2;
+}
+
+/* ==========================================================================
+   PHASE 1: HORIZONTAL POWER-ON SCAN BEAM
+   ========================================================================== */
+
+.aura-loader-beam {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 4;
+  transition: opacity 0.4s ease;
+}
+
+.aura-loader-beam.is-faded {
+  opacity: 0;
+}
+
+.aura-loader-beam__line {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(56, 189, 248, 0.25) 20%, 
+    #7DE7FF 50%, 
+    rgba(56, 189, 248, 0.25) 80%, 
+    transparent 100%
+  );
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.8),
+              0 0 5px #7DE7FF;
+  animation: auraBeamIgnite 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.aura-loader-beam__flare {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 160px;
+  height: 48px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse at center, rgba(125, 231, 255, 0.95) 0%, rgba(56, 189, 248, 0.5) 40%, transparent 80%);
+  filter: blur(4px);
+  animation: auraFlareFlash 0.75s ease-out forwards;
+}
+
+@keyframes auraBeamIgnite {
+  0% { transform: scaleX(0); opacity: 0; }
+  40% { transform: scaleX(0.75); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0; }
+}
+
+@keyframes auraFlareFlash {
+  0% { transform: translate(-50%, -50%) scale(0.2); opacity: 0; }
+  50% { transform: translate(-50%, -50%) scale(1.7); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(0.6); opacity: 0; }
+}
+
+/* ==========================================================================
+   LOWER DEDICATED HUD & STATUS SECTION
+   ========================================================================== */
+
+.aura-loader-hud {
+  position: absolute;
+  bottom: 3.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 380px;
+  max-width: 90vw;
+  pointer-events: auto;
+}
+
+/* Brand Identity */
+.aura-loader-identity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 1.25rem;
+}
+
+.aura-loader-brand-title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.aura-loader-title-main {
+  font-size: 1.65rem;
+  font-weight: 900;
+  letter-spacing: 0.28em;
+  color: #FFFFFF;
+  text-shadow: 0 0 20px rgba(56, 189, 248, 0.35);
+}
+
+.aura-loader-title-sub {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  color: #38BDF8;
+}
+
+/* Progress & Status Box */
+.aura-loader-progress-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.aura-loader-status-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.aura-loader-status-text {
+  font-size: 0.725rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #7DE7FF;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+}
+
+/* Thin Luminous Cyan Progress Track */
+.aura-progress-track {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.09);
+  border-radius: 9999px;
+  overflow: visible;
+  position: relative;
+}
+
+.aura-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #0A111D 0%, #38BDF8 60%, #7DE7FF 100%);
+  border-radius: 9999px;
+  position: relative;
+  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+}
+
+.aura-progress-glow-head {
+  position: absolute;
+  right: -2px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  box-shadow: 0 0 10px #7DE7FF,
+              0 0 20px #38BDF8;
+}
+
+.aura-loader-subinfo {
+  font-size: 0.72rem;
+  color: #94A3B8;
+  letter-spacing: 0.03em;
+  margin-top: 0.2rem;
+}
+
+/* Error State Container */
+.aura-loader-error-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  border-radius: 12px;
+  width: 100%;
+  backdrop-filter: blur(8px);
+}
+
+.aura-error-icon {
+  color: #EF4444;
+}
+
+.aura-error-text {
+  font-size: 0.8rem;
+  color: #FCA5A5;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.aura-retry-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 1.1rem;
+  border-radius: 9999px;
+  background: rgba(239, 68, 68, 0.25);
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  color: #FFFFFF;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.aura-retry-btn:hover {
+  background: rgba(239, 68, 68, 0.4);
+  border-color: #EF4444;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN & ACCESSIBILITY
+   ========================================================================== */
+
+@media (max-width: 640px) {
+  .aura-loader-hud {
+    bottom: 2rem;
+    width: 320px;
+  }
+
+  .aura-loader-title-main {
+    font-size: 1.35rem;
+  }
+
+  .aura-loader-title-sub {
+    font-size: 0.72rem;
+  }
+
+  .aura-loader-subinfo {
+    font-size: 0.65rem;
+  }
+}
+
+/* Reduced Motion Mode */
+@media (prefers-reduced-motion: reduce) {
+  .aura-loader-overlay {
+    transition: opacity 0.3s ease !important;
+  }
+
+  .aura-progress-fill {
+    transition: none !important;
+  }
+}

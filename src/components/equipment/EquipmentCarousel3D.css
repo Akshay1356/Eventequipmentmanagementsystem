@@ -1,0 +1,294 @@
+/* 3D Perspective Carousel Styles */
+
+.aura-carousel3d {
+  position: relative;
+  width: 100%;
+  padding: 2.5rem 0 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  user-select: none;
+}
+
+.aura-carousel3d__stage {
+  width: 100%;
+  height: 440px;
+  perspective: 1100px;
+  perspective-origin: 50% 48%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.aura-carousel3d__ring {
+  position: relative;
+  width: 290px;
+  height: 380px;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.aura-carousel3d__card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 290px;
+  height: 380px;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transition: opacity 0.3s ease, filter 0.3s ease;
+  pointer-events: auto;
+}
+
+.aura-carousel3d__card-inner {
+  width: 100%;
+  height: 100%;
+  background: #0A121F;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.75),
+              0 0 1px rgba(255, 255, 255, 0.2);
+  transition: all var(--transition-fast);
+}
+
+/* Front card visual emphasis */
+.aura-carousel3d__card.is-front .aura-carousel3d__card-inner {
+  border-color: rgba(56, 189, 248, 0.45);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.85),
+              0 0 24px rgba(56, 189, 248, 0.18);
+  background: #0E1829;
+}
+
+/* Backside cards dimming */
+.aura-carousel3d__card.is-back {
+  opacity: 0.25;
+  filter: blur(1.5px);
+  pointer-events: none;
+}
+
+/* Media Showcase */
+.aura-carousel3d__media {
+  position: relative;
+  width: 100%;
+  height: 190px;
+  overflow: hidden;
+  background: #040810;
+}
+
+.aura-carousel3d__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.aura-carousel3d__card:hover .aura-carousel3d__img {
+  transform: scale(1.06);
+}
+
+.aura-carousel3d__fallback-img {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: var(--color-accent-primary);
+  background: linear-gradient(135deg, #0A1322 0%, #03060C 100%);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.aura-carousel3d__gradient-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(10, 18, 31, 0.95) 100%);
+}
+
+.aura-carousel3d__category-tag {
+  position: absolute;
+  top: 0.85rem;
+  left: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(2, 2, 4, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-accent-bright);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+/* Info Section */
+.aura-carousel3d__info {
+  padding: 1.15rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.aura-carousel3d__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.aura-carousel3d__title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #FFF;
+  line-height: 1.3;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.aura-carousel3d__desc {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+  margin-top: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.aura-carousel3d__specs {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.85rem;
+}
+
+.aura-carousel3d__spec-chip {
+  font-size: 0.7rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.15rem 0.45rem;
+  color: var(--color-text-muted);
+}
+
+.aura-carousel3d__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 0.75rem;
+}
+
+.aura-carousel3d__price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.2rem;
+}
+
+.aura-carousel3d__amount {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #FFF;
+}
+
+.aura-carousel3d__unit {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.aura-carousel3d__action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-accent-primary);
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid var(--border-accent);
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.aura-carousel3d__action:hover {
+  background: rgba(56, 189, 248, 0.18);
+  color: var(--color-accent-bright);
+  border-color: var(--color-accent-primary);
+  transform: translateY(-1px);
+}
+
+/* Controls indicator */
+.aura-carousel3d__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  font-size: 0.775rem;
+  color: var(--color-text-muted);
+}
+
+.aura-carousel3d__indicator-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent-primary);
+  box-shadow: 0 0 6px var(--color-accent-primary);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* Reduced Motion Fallback Mode */
+.aura-carousel3d.is-reduced-motion .aura-carousel3d__stage {
+  height: auto;
+  perspective: none;
+}
+
+.aura-carousel3d.is-reduced-motion .aura-carousel3d__ring {
+  width: 100%;
+  height: auto;
+  transform: none !important;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.aura-carousel3d.is-reduced-motion .aura-carousel3d__card {
+  position: static;
+  width: 100%;
+  height: auto;
+  opacity: 1 !important;
+  filter: none !important;
+  pointer-events: auto !important;
+}
+
+/* Mobile & Tablet responsiveness */
+@media (max-width: 768px) {
+  .aura-carousel3d__stage {
+    height: 420px;
+    perspective: 800px;
+  }
+
+  .aura-carousel3d__ring {
+    width: 260px;
+    height: 360px;
+  }
+
+  .aura-carousel3d__card {
+    width: 260px;
+    height: 360px;
+  }
+}

@@ -1,0 +1,113 @@
+/* Input Styles */
+
+.aura-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  width: 100%;
+}
+
+.aura-input-label {
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.aura-input-required {
+  color: var(--color-error);
+}
+
+.aura-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.aura-input {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--color-text-primary);
+  background: var(--color-bg-surface-elevated);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.aura-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.aura-input:hover:not(:disabled) {
+  border-color: rgba(255, 255, 255, 0.25);
+  background: #141D2C;
+}
+
+.aura-input:focus {
+  outline: none;
+  border-color: var(--color-accent-primary);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+  background: #141D2C;
+}
+
+.aura-input.has-left-icon {
+  padding-left: 2.5rem;
+}
+
+.aura-input.has-right-icon {
+  padding-right: 2.5rem;
+}
+
+.aura-input-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.aura-input-icon--left {
+  left: 0.85rem;
+}
+
+.aura-input-icon--right {
+  right: 0.85rem;
+}
+
+/* Error State */
+.aura-input-group.has-error .aura-input {
+  border-color: var(--color-error);
+  background: rgba(239, 68, 68, 0.04);
+}
+
+.aura-input-group.has-error .aura-input:focus {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+.aura-input-feedback {
+  font-size: 0.8rem;
+  margin-top: 0.1rem;
+}
+
+.aura-input-feedback--error {
+  color: var(--color-error);
+}
+
+.aura-input-feedback--helper {
+  color: var(--color-text-muted);
+}
+
+/* Disabled State */
+.aura-input-group.is-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}

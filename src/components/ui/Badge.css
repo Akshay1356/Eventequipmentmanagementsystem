@@ -1,0 +1,106 @@
+/* Badge Styles */
+
+.aura-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-weight: 500;
+  line-height: 1;
+  text-transform: capitalize;
+  letter-spacing: 0.02em;
+  border: 1px solid transparent;
+}
+
+.aura-badge--sm {
+  font-size: 0.72rem;
+  padding: 0.15rem 0.45rem;
+}
+
+.aura-badge--md {
+  font-size: 0.8rem;
+  padding: 0.25rem 0.65rem;
+}
+
+.aura-badge__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Status: Confirmed / Available / Success */
+.aura-badge--confirmed,
+.aura-badge--available,
+.aura-badge--success {
+  background: var(--color-success-bg);
+  color: #34D399;
+  border-color: var(--color-success-border);
+}
+
+.aura-badge--confirmed .aura-badge__dot,
+.aura-badge--available .aura-badge__dot,
+.aura-badge--success .aura-badge__dot {
+  background: var(--color-success);
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.5);
+}
+
+/* Status: Pending / Warning / Limited */
+.aura-badge--pending,
+.aura-badge--warning,
+.aura-badge--limited {
+  background: var(--color-warning-bg);
+  color: #FBBF24;
+  border-color: var(--color-warning-border);
+}
+
+.aura-badge--pending .aura-badge__dot,
+.aura-badge--warning .aura-badge__dot,
+.aura-badge--limited .aura-badge__dot {
+  background: var(--color-warning);
+  box-shadow: 0 0 6px rgba(245, 158, 11, 0.5);
+}
+
+/* Status: Rejected / Error / Unavailable */
+.aura-badge--rejected,
+.aura-badge--error,
+.aura-badge--unavailable {
+  background: var(--color-error-bg);
+  color: #F87171;
+  border-color: var(--color-error-border);
+}
+
+.aura-badge--rejected .aura-badge__dot,
+.aura-badge--error .aura-badge__dot,
+.aura-badge--unavailable .aura-badge__dot {
+  background: var(--color-error);
+}
+
+/* Status: Cancelled / Default / Muted */
+.aura-badge--cancelled,
+.aura-badge--default {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--color-text-secondary);
+  border-color: var(--border-subtle);
+}
+
+.aura-badge--cancelled .aura-badge__dot,
+.aura-badge--default .aura-badge__dot {
+  background: var(--color-text-muted);
+}
+
+/* Status: Completed / Info */
+.aura-badge--completed,
+.aura-badge--info {
+  background: var(--color-info-bg);
+  color: var(--color-accent-bright);
+  border-color: var(--color-info-border);
+}
+
+.aura-badge--completed .aura-badge__dot,
+.aura-badge--info .aura-badge__dot {
+  background: var(--color-accent-primary);
+  box-shadow: 0 0 6px rgba(56, 189, 248, 0.5);
+}
