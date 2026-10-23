@@ -70,20 +70,40 @@ export async function getEquipment(filters = {}) {
     };
   }
 
-  // Live HTTP API Request
+  // Live HTTP API Request with graceful fallback
   const queryParams = new URLSearchParams();
   if (category && category !== 'all') queryParams.append('category', category);
   if (search) queryParams.append('search', search);
   if (sortBy) queryParams.append('sort', sortBy);
   if (status && status !== 'all') queryParams.append('status', status);
 
-  const endpoint = `equipment?${queryParams.toString()}`;
-  const response = await apiRequest(endpoint);
-  return {
-    data: response.data || response,
-    total: response.total || (response.data ? response.data.length : response.length),
-    mode: 'live',
-  };
+  try {
+    const endpoint = `equipment?${queryParams.toString()}`;
+    const response = await apiRequest(endpoint);
+    return {
+      data: response.data || response,
+      total: response.total || (response.data ? response.data.length : response.length),
+      mode: 'live',
+    };
+  } catch (error) {
+    console.warn('Backend unavailable, falling back to local equipment catalogue:', error.message);
+    let results = [...MOCK_EQUIPMENT];
+    if (category && category !== 'all') {
+      results = results.filter((item) => item.category.toLowerCase() === category.toLowerCase());
+    }
+    if (search && search.trim()) {
+      const q = search.toLowerCase().trim();
+      results = results.filter(
+        (item) => item.name.toLowerCase().includes(q) || item.brand.toLowerCase().includes(q)
+      );
+    }
+    return {
+      data: results,
+      total: results.length,
+      mode: 'mock',
+      fallback: true,
+    };
+  }
 }
 
 /**
@@ -94,7 +114,6 @@ export async function getEquipmentById(id) {
     await new Promise((resolve) => setTimeout(resolve, 80));
     const found = MOCK_EQUIPMENT.find((item) => item.id === id);
     if (!found) {
-      // Fallback to first item for demo links if arbitrary ID passed
       return {
         data: MOCK_EQUIPMENT[0],
         mode: 'mock',
@@ -107,11 +126,21 @@ export async function getEquipmentById(id) {
     };
   }
 
-  const response = await apiRequest(`equipment/${id}`);
-  return {
-    data: response.data || response,
-    mode: 'live',
-  };
+  try {
+    const response = await apiRequest(`equipment/${id}`);
+    return {
+      data: response.data || response,
+      mode: 'live',
+    };
+  } catch (err) {
+    console.warn(`Failed to fetch equipment ${id} from live API, using fallback:`, err.message);
+    const found = MOCK_EQUIPMENT.find((item) => item.id === id) || MOCK_EQUIPMENT[0];
+    return {
+      data: found,
+      mode: 'mock',
+      isFallback: true,
+    };
+  }
 }
 
 /**
@@ -121,8 +150,13 @@ export async function getCategories() {
   if (USE_MOCK_DATA) {
     return MOCK_CATEGORIES;
   }
-  const response = await apiRequest('categories');
-  return response.data || response;
+  try {
+    const response = await apiRequest('categories');
+    return response.data || response;
+  } catch (err) {
+    console.warn('Failed to load categories from live API, using fallback:', err.message);
+    return MOCK_CATEGORIES;
+  }
 }
 
 export default {

@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+config.bat
+
+# Environment and local server data
+.env
+.env.*
+backend/data/
+backend/node_modules/

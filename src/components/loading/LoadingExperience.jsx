@@ -70,12 +70,17 @@ export function LoadingExperience({ onComplete }) {
           setStatusText('INITIALIZING EQUIPMENT INVENTORY');
         }, prefersReducedMotion ? 400 : 1100);
 
-        // Real data readiness check to equipment service
+        // Real data readiness check to equipment service with race timeout
         const startTime = Date.now();
-        await getEquipment();
+        try {
+          const timeoutPromise = new Promise((resolve) => setTimeout(resolve, 2000));
+          await Promise.race([getEquipment(), timeoutPromise]);
+        } catch (fetchErr) {
+          console.warn('Backend readiness check bypassed, continuing loading sequence:', fetchErr);
+        }
 
         const elapsed = Date.now() - startTime;
-        const minDisplayTime = prefersReducedMotion ? 600 : 1900;
+        const minDisplayTime = prefersReducedMotion ? 400 : 1600;
         const remainingDelay = Math.max(0, minDisplayTime - elapsed);
 
         // Step C: Prepare event workspace & trigger cinematic exit
@@ -89,18 +94,18 @@ export function LoadingExperience({ onComplete }) {
             setPhase('exit');
             setIsExiting(true);
 
-            // Give the 3D spotlight flash and contraction effect 650ms before unmounting
+            // Give the 3D spotlight flash and contraction effect 550ms before unmounting
             addTimer(() => {
               if (onComplete) onComplete();
-            }, 650);
-          }, 350);
+            }, 550);
+          }, 250);
         }, remainingDelay);
 
       } catch (err) {
         if (isMountedRef.current) {
           console.error('Loader initialization error:', err);
-          setErrorMessage('Unable to initialize live equipment database.');
-          setPhase('error');
+          // Instead of locking screen, exit cleanly to allow user into the application
+          if (onComplete) onComplete();
         }
       }
     };

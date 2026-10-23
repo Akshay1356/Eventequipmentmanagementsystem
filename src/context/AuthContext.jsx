@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { AuthContext } from './authContextInstance';
+import { authService } from '../services/authService';
 
 const HARDCODED_USERS = {
   user: {
@@ -30,36 +31,68 @@ export function AuthProvider({ children }) {
 
   const [authMode, setAuthMode] = useState('mock'); // 'mock' | 'live'
 
-  // Hardcoded authentication for Admin and User
-  const login = (identifier, password) => {
+  // Authentication supporting both Live API and Hardcoded Demo Logins
+  const login = async (identifier, password) => {
     const cleanId = (identifier || '').trim().toLowerCase();
     const cleanPass = (password || '').trim();
 
-    // 1. Hardcoded Admin Authentication
+    // 1. Check Hardcoded Admin Credentials
     if (
       (cleanId === 'admin' || cleanId === 'admin@aura.com' || cleanId === 'sarah.admin@auraevents.com') &&
       (cleanPass === 'admin' || cleanPass === 'admin123')
     ) {
+      try {
+        await authService.login('admin@aura.com', 'admin123');
+      } catch {
+        // Fall back gracefully to mock session
+      }
       const user = HARDCODED_USERS.admin;
       setCurrentUser(user);
       sessionStorage.setItem('aura_auth_user', JSON.stringify(user));
       return { success: true, user, role: 'admin' };
     }
 
-    // 2. Hardcoded User/Customer Authentication
+    // 2. Check Hardcoded User/Customer Credentials
     if (
       (cleanId === 'user' || cleanId === 'user@aura.com' || cleanId === 'alex.rivera@example.com') &&
       (cleanPass === 'user' || cleanPass === 'user123' || cleanPass === 'demo123')
     ) {
+      try {
+        await authService.login('user@aura.com', 'user123');
+      } catch {
+        // Fall back gracefully to mock session
+      }
       const user = HARDCODED_USERS.user;
       setCurrentUser(user);
       sessionStorage.setItem('aura_auth_user', JSON.stringify(user));
       return { success: true, user, role: 'customer' };
     }
 
+    // 3. Attempt Live API Authentication if not matched
+    try {
+      const liveAuth = await authService.login(identifier, password);
+      if (liveAuth && liveAuth.user) {
+        const user = {
+          id: liveAuth.user.userId,
+          name: liveAuth.user.fullName,
+          email: liveAuth.user.email,
+          role: liveAuth.user.role.toLowerCase(),
+          phone: liveAuth.user.phone,
+        };
+        setCurrentUser(user);
+        sessionStorage.setItem('aura_auth_user', JSON.stringify(user));
+        return { success: true, user, role: user.role };
+      }
+    } catch (apiErr) {
+      return {
+        success: false,
+        error: apiErr.message || 'Invalid credentials.',
+      };
+    }
+
     return {
       success: false,
-      error: 'Invalid credentials. Please use the hardcoded admin or user logins.',
+      error: 'Invalid credentials. Please use admin / admin or user / user.',
     };
   };
 
@@ -81,6 +114,7 @@ export function AuthProvider({ children }) {
   const logout = () => {
     setCurrentUser(null);
     sessionStorage.removeItem('aura_auth_user');
+    authService.clearStoredToken();
   };
 
   const isAuthenticated = Boolean(currentUser);

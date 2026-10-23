@@ -15,8 +15,13 @@ import Input from '../components/ui/Input';
 import Select from '../components/ui/Select';
 import Spinner from '../components/ui/Spinner';
 import { useAuth } from '../hooks/useAuth';
-import { getMyBookings, updateBookingStatus } from '../services/bookingService';
-import { getAdminInventory, updateEquipmentStock, addEquipment } from '../services/adminService';
+import {
+  getAdminBookings,
+  getAdminInventory,
+  updateEquipmentStock,
+  addEquipment,
+  updateAdminBookingStatus,
+} from '../services/adminService';
 import './AdminDashboardPage.css';
 
 export function AdminDashboardPage() {
@@ -53,7 +58,7 @@ export function AdminDashboardPage() {
     setIsLoading(true);
     try {
       const [bookingsRes, inventoryRes] = await Promise.all([
-        getMyBookings(),
+        getAdminBookings(),
         getAdminInventory(),
       ]);
       setBookings(bookingsRes.data || []);
@@ -70,7 +75,7 @@ export function AdminDashboardPage() {
     async function init() {
       try {
         const [bookingsRes, inventoryRes] = await Promise.all([
-          getMyBookings(),
+          getAdminBookings(),
           getAdminInventory(),
         ]);
         if (!ignore) {
@@ -91,7 +96,7 @@ export function AdminDashboardPage() {
 
   const handleUpdateStatus = async (id, newStatus) => {
     try {
-      await updateBookingStatus(id, newStatus);
+      await updateAdminBookingStatus(id, newStatus);
       setFeedbackMessage(`Reservation ${id} updated to ${newStatus.toUpperCase()}`);
       setTimeout(() => setFeedbackMessage(''), 4000);
       await reloadData();
@@ -252,7 +257,7 @@ export function AdminDashboardPage() {
           <div className="aura-admin-metric">
             <span className="aura-admin-metric__label">Confirmed Revenue</span>
             <span className="aura-admin-metric__val" style={{ color: 'var(--color-accent-bright)' }}>
-              ${confirmedRevenue.toLocaleString()}
+              ₹{confirmedRevenue.toLocaleString('en-IN')}
             </span>
             <span className="aura-admin-metric__sub">Approved dispatch contracts</span>
           </div>
@@ -354,7 +359,7 @@ export function AdminDashboardPage() {
                         <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>{b.durationDays}d duration</div>
                       </td>
                       <td style={{ textAlign: 'right', fontWeight: 700, color: '#FFF' }}>
-                        ${b.totalAmount.toLocaleString()}
+                        ₹{b.totalAmount.toLocaleString('en-IN')}
                       </td>
                       <td style={{ textAlign: 'center' }}>
                         <Badge variant={b.status}>{b.status}</Badge>
@@ -417,7 +422,7 @@ export function AdminDashboardPage() {
                 {inventory.map((item) => (
                   <tr key={item.id}>
                     <td style={{ fontFamily: 'var(--font-mono)', color: 'var(--color-accent-primary)' }}>
-                      {item.id}
+                       {item.id}
                     </td>
                     <td>
                       <div className="aura-admin__table-primary-text">{item.name}</div>
@@ -435,7 +440,7 @@ export function AdminDashboardPage() {
                       {item.availableQuantity}
                     </td>
                     <td style={{ textAlign: 'right', fontWeight: 600, color: '#FFF' }}>
-                      ${item.dailyRate}.00
+                      ₹{item.dailyRate?.toLocaleString('en-IN')}
                     </td>
                     <td style={{ textAlign: 'center' }}>
                       <Badge variant={item.status}>{item.status}</Badge>
@@ -547,9 +552,9 @@ export function AdminDashboardPage() {
                 ]}
               />
               <Input
-                label="Daily Rental Rate ($)"
+                label="Daily Rental Rate (₹)"
                 type="number"
-                min="10"
+                min="100"
                 required
                 value={newItemRate}
                 onChange={(e) => setNewItemRate(e.target.value)}

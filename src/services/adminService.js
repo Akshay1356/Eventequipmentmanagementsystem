@@ -101,8 +101,75 @@ export async function addEquipment(equipmentData) {
   return { success: true, data: response.data || response, mode: 'live' };
 }
 
+/**
+ * Get all customer reservations for operations oversight
+ */
+export async function getAdminBookings(filters = {}) {
+  if (USE_MOCK_DATA) {
+    await new Promise((resolve) => setTimeout(resolve, 150));
+    try {
+      const stored = sessionStorage.getItem('aura_demo_bookings');
+      if (stored) {
+        return { data: JSON.parse(stored), mode: 'mock' };
+      }
+    } catch {
+      // fallback
+    }
+    return { data: [], mode: 'mock' };
+  }
+
+  const queryParams = new URLSearchParams();
+  if (filters.status && filters.status !== 'all') {
+    queryParams.append('status', filters.status);
+  }
+
+  const endpoint = `admin/bookings${queryParams.toString() ? `?${queryParams.toString()}` : ''}`;
+  const response = await apiRequest(endpoint);
+  return {
+    data: response.data || response,
+    total: response.total || (response.data ? response.data.length : response.length),
+    mode: 'live',
+  };
+}
+
+/**
+ * Update reservation status from admin dashboard
+ */
+export async function updateAdminBookingStatus(id, newStatus) {
+  if (USE_MOCK_DATA) {
+    await new Promise((resolve) => setTimeout(resolve, 200));
+    try {
+      const stored = sessionStorage.getItem('aura_demo_bookings');
+      if (stored) {
+        const bookings = JSON.parse(stored);
+        const idx = bookings.findIndex((b) => b.id === id);
+        if (idx !== -1) {
+          bookings[idx].status = newStatus.toLowerCase();
+          sessionStorage.setItem('aura_demo_bookings', JSON.stringify(bookings));
+          return { success: true, data: bookings[idx], mode: 'mock' };
+        }
+      }
+    } catch {
+      // fallback
+    }
+    return { success: true, mode: 'mock' };
+  }
+
+  const response = await apiRequest(`admin/bookings/${id}/status`, {
+    method: 'PATCH',
+    body: { status: newStatus.toUpperCase() },
+  });
+  return {
+    success: true,
+    data: response.data || response,
+    mode: 'live',
+  };
+}
+
 export default {
   getAdminInventory,
   updateEquipmentStock,
   addEquipment,
+  getAdminBookings,
+  updateAdminBookingStatus,
 };

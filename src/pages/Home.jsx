@@ -171,7 +171,7 @@ export function Home() {
                   {/* Card Footer & Actions */}
                   <div className="aura-eq-card__footer">
                     <div className="aura-eq-card__price-box">
-                      <span className="aura-eq-card__rate">${item.dailyRate}</span>
+                      <span className="aura-eq-card__rate">₹{item.dailyRate?.toLocaleString('en-IN')}</span>
                       <span className="aura-eq-card__unit">{item.unit}</span>
                     </div>
 

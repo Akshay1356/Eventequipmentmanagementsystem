@@ -101,10 +101,10 @@ export function BookingPage() {
   };
 
   const durationDays = calculateDurationDays();
-  const rate = equipment ? equipment.dailyRate : 280;
-  const maxStock = equipment?.availableQuantity || 16;
+  const rate = Number(equipment?.dailyRate ?? equipment?.daily_rate ?? 5500);
+  const maxStock = Number(equipment?.availableQuantity ?? equipment?.available_quantity ?? equipment?.total_quantity ?? 16);
   const equipmentSubtotal = durationDays * quantity * rate;
-  const technicianDailyRate = 250;
+  const technicianDailyRate = 2500;
   const technicianFee = needsTechnician ? durationDays * technicianDailyRate : 0;
   const totalAmount = equipmentSubtotal + technicianFee;
 
@@ -164,7 +164,19 @@ export function BookingPage() {
       };
 
       const result = await createBooking(payload);
-      setConfirmedBooking(result.data);
+      const bookingData = result?.data || result;
+      setConfirmedBooking({
+        ...payload,
+        ...bookingData,
+        id: bookingData?.bookingReference || bookingData?.bookingCode || bookingData?.bookingId || bookingData?.id || 'BK-CONFIRMED',
+        eventName: payload.eventName || bookingData?.eventName,
+        venueName: payload.venueName || bookingData?.venueName,
+        startDate: payload.startDate || bookingData?.startDate,
+        endDate: payload.endDate || bookingData?.endDate,
+        durationDays: payload.durationDays || bookingData?.durationDays || bookingData?.totalDays,
+        items: (bookingData?.items && bookingData.items.length > 0) ? bookingData.items : payload.items,
+        totalAmount: Number(bookingData?.totalAmount ?? bookingData?.pricing?.totalAmount ?? payload.totalAmount ?? 0),
+      });
     } catch (err) {
       console.error('Booking failed', err);
       setFormErrors({ submit: 'Failed to submit booking request. Please try again.' });
@@ -224,7 +236,7 @@ export function BookingPage() {
               <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid var(--border-medium)', paddingTop: '0.65rem' }}>
                 <span style={{ fontWeight: 600, color: '#FFF' }}>Estimated Total:</span>
                 <strong style={{ fontSize: '1.25rem', color: 'var(--color-accent-bright)' }}>
-                  ${confirmedBooking.totalAmount.toLocaleString()}.00
+                  ₹{(confirmedBooking?.totalAmount ?? confirmedBooking?.pricing?.totalAmount ?? 0).toLocaleString('en-IN')}
                 </strong>
               </div>
             </div>
@@ -430,7 +442,7 @@ export function BookingPage() {
                       Certified audio/lighting engineer for on-site load-in supervision, Dante/DMX network routing, and live sound/lighting operation.
                     </div>
                   </div>
-                  <div className="aura-addon-price">+${technicianDailyRate}/day</div>
+                  <div className="aura-addon-price">+₹{technicianDailyRate.toLocaleString('en-IN')}/day</div>
                 </label>
 
                 {/* Staging Notes */}
@@ -470,7 +482,7 @@ export function BookingPage() {
                 <div className="aura-summary-item__info">
                   <h3 className="aura-summary-item__name">{equipment.name}</h3>
                   <div className="aura-summary-item__rate">
-                    ${equipment.dailyRate}.00 / day
+                    ₹{(equipment.dailyRate ?? rate ?? 0).toLocaleString('en-IN')} / day
                   </div>
                 </div>
               </div>
@@ -514,12 +526,12 @@ export function BookingPage() {
               </div>
               <div className="aura-summary-row">
                 <span>Equipment Rental Subtotal:</span>
-                <strong>${equipmentSubtotal.toLocaleString()}.00</strong>
+                <strong>₹{(equipmentSubtotal || 0).toLocaleString('en-IN')}</strong>
               </div>
               {needsTechnician && (
                 <div className="aura-summary-row">
                   <span>On-Site Technician ({durationDays}d):</span>
-                  <strong>${technicianFee.toLocaleString()}.00</strong>
+                  <strong>₹{(technicianFee || 0).toLocaleString('en-IN')}</strong>
                 </div>
               )}
               <div className="aura-summary-row">
@@ -535,7 +547,7 @@ export function BookingPage() {
             {/* Total Estimated Cost */}
             <div className="aura-summary-total">
               <span className="aura-summary-total-label">Estimated Total:</span>
-              <span className="aura-summary-total-val">${totalAmount.toLocaleString()}.00</span>
+              <span className="aura-summary-total-val">₹{(totalAmount || 0).toLocaleString('en-IN')}</span>
             </div>
 
             {/* Submit Reservation Action */}

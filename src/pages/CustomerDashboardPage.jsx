@@ -236,7 +236,7 @@ export function CustomerDashboardPage() {
                   {/* Total & Action Buttons */}
                   <div className="aura-booking-card__pricing-actions">
                     <div className="aura-booking-card__total">
-                      ${b.totalAmount.toLocaleString()}.00
+                      ₹{Number(b.totalAmount || b.total_amount || 0).toLocaleString('en-IN')}
                     </div>
 
                     <div className="aura-booking-card__btn-group">

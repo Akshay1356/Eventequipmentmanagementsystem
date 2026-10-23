@@ -27,8 +27,13 @@ export async function apiRequest(endpoint, { method = 'GET', body, headers = {},
     ...headers,
   };
 
-  if (token) {
-    requestHeaders['Authorization'] = `Bearer ${token}`;
+  const activeToken =
+    token ||
+    (typeof window !== 'undefined' &&
+      (localStorage.getItem('aura_auth_token') || sessionStorage.getItem('aura_auth_token')));
+
+  if (activeToken) {
+    requestHeaders['Authorization'] = `Bearer ${activeToken}`;
   }
 
   try {

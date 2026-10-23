@@ -14,24 +14,27 @@ export function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage('');
     setIsLoading(true);
 
-    setTimeout(() => {
+    try {
+      const result = await login(identifier, password);
       setIsLoading(false);
-      const result = login(identifier, password);
-      if (result.success) {
+      if (result && result.success) {
         if (result.role === 'admin') {
           navigate('/admin');
         } else {
           navigate('/my-bookings');
         }
       } else {
-        setErrorMessage(result.error || 'Invalid credentials.');
+        setErrorMessage(result?.error || 'Invalid credentials.');
       }
-    }, 450);
+    } catch (err) {
+      setIsLoading(false);
+      setErrorMessage(err.message || 'Invalid credentials.');
+    }
   };
 
   return (
